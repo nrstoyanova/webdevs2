@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chicago Crime Data</title>
+
+
+
+    <style>
+        #intro {
+            background-color: #ccbcaf;
+            width: 100%;
+            height: 350px;
+            font-size: 200%;
+            font-family: Times New ROman;
+        }
+        
+        div {
+          
+            border: 1px solid black;
+            border-radius: 6px;
+            min-height: 75px;
+            padding-top: 5px;
+            padding-right: 5px;
+            padding-bottom: 5px;
+            padding-left: 0px;
+            text-align: center;
+            height: 270px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        h1{ font-size: 45%;
+            font-family: Times
+            text-shadow: -1px 0 white, 0 1px white, 1px 0 white, -1.5px 0 white;
+        }
+        
+        h3{ font-size: 50%;
+            font-family: Times;
+        }
+        h4{ 
+            text-align: center;
+        }
+        #theTable {
+            text-align: center;
+            border: 1px solid black;
+        }
+        
+        th,
+        td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+        p {
+            text-shadow: -1.5px 0 white, 0 1.5px white, 1.5px 0 white, 0 -1.5px white;
+        }
+    </style>
+
+    <div id="intro">
+        <p>
+            Chicago Crime Data Search
+            </p>
+            <h3>Use the dropdown bars to filter your search by crime type, neighborhood, year, and number of crimes displayed. 
+            <br>Click on the image of the mountain to look at the location of the crime on Google Maps. 
+            <br>Refresh the page to search again.</h3>
+            
+            <h1>Nadia Stoyanova & Leonidas Georgopoulos, 2nd Period</h1>
+            
+            <br>
+
+<select id="select">
+    <option disabled>Crime Type</option>
+  <option value="BATTERY">Battery</option>
+  <option value="ASSAULT">Assault</option>
+  <option value="ROBBERY">Robbery</option>
+  <option value="THEFT">Theft</option>
+  <option value="PROSTITUTION">Prostitution</option>
+  <option value="NARCOTICS">Narcotics</option>
+  <option value="STALKING">Stalking</option>
+  <option value="KIDNAPPING">Kidnapping</option>
+  <option value="SEX OFFENSE">Sex Offense</option>
+</select>
+
+<select id="comm">
+    <option disabled>Neighborhood</option>
+    <option value="1">Rogers Park</option>
+    <option value="2">West Ridge</option>
+    <option value="3">Uptown</option>
+    <option value="4">Lincoln Square</option>
+    <option value="5">North Center</option>
+    <option value="6">Lake View</option>
+    <option value="7">Lincoln Park</option>
+    <option value="8">Near North Side</option>
+    <option value="9">Edison Park</option>
+    <option value="10">Norwood Park</option>
+    <option value="11">Jefferson Park</option>
+    <option value="12">Forest Glen</option>
+    <option value="13">North Park</option>
+    <option value="14">Albany Park</option>
+    <option value="15">Portage Park</option>
+    <option value="16">Irving Park</option>
+    <option value="17">Dunning</option>
+    <option value="18">Montclare</option>
+    <option value="19">Belmon Cragin</option>
+    <option value="20">Hermosa</option>
+    <option value="21">Avondale</option>
+    <option value="22">Logan Square</option>
+    <option value="23">Humboldt Park</option>
+    <option value="24">West Town</option>
+    <option value="25">Austin</option>
+    <option value="26">West Garfield Park</option>
+    <option value="27">East Garfield Park</option>
+    <option value="28">Near West Side</option>
+    <option value="29">North Lawndale</option>
+    <option value="30">South Lawndale</option>
+    <option value="31">Lower West Side</option>
+    <option value="32">Loop</option>
+    <option value="33">Near South Side</option>
+    <option value="34">Armour Square</option>
+    <option value="35">Douglas</option>
+    <option value="36">Oakland</option>
+    <option value="37">Fuller Park</option>
+    <option value="38">Grand Boulevard</option>
+    <option value="39">Kenwood</option>
+    <option value="40">Washington Park</option>
+    <option value="41">Hyde Park</option>
+    <option value="42">Woodlawn</option>
+    <option value="43">South Shore</option>
+    <option value="44">Chatham</option>
+    <option value="45">Avalon Park</option>
+    <option value="46">South Chicago</option>
+    <option value="47">Burnside</option>
+    <option value="48">Calumet Heights</option>
+    <option value="49">Roseand</option>
+    <option value="50">Pullman</option>
+    <option value="51">South Deering</option>
+    <option value="52">East Side</option>
+    <option value="53">West Pullman</option>
+    <option value="54">Riverdale</option>
+    <option value="55">Hegewisch</option>
+    <option value="56">Garfield Ridge</option>
+    <option value="57">Archer Heights</option>
+    <option value="58">Brighton Park</option>
+    <option value="59">McKinley Park</option>
+    <option value="60">Bridgeport</option>
+    <option value="61">New City</option>
+    <option value="62">West Elsdon</option>
+    <option value="63">Gage Park</option>
+    <option value="64">Clearing</option>
+    <option value="65">West Lawn</option>
+    <option value="66">Chicago Lawn</option>
+    <option value="67">West Englewood</option>
+    <option value="68">Englewood</option>
+    <option value="69">Greater Grand Crossing</option>
+    <option value="70">Ashburn</option>
+    <option value="71">Ashburn Gresham</option>
+    <option value="72">Beverly</option>
+    <option value="73">Washington Heights</option>
+    <option value="74">Mount Greenwood</option>
+    <option value="75">Morgan Park</option>
+    <option value="76">O'Hare</option>
+    <option value="77">Edgewater</option>
+</select>
+
+<select id="year">
+    <option disabled>Year</option>
+    <option>2017</option>
+    <option>2016</option>
+    <option>2015</option>
+    <option>2014</option>
+    <option>2013</option>
+    <option>2012</option>
+    <option>2011</option>
+    <option>2010</option>
+    <option>2009</option>
+    <option>2008</option>
+    <option>2007</option>
+    <option>2006</option>
+    <option>2005</option>
+    <option>2004</option>
+    <option>2003</option>
+    <option>2002</option>
+    <option>2001</option>
+</select>
+
+<select id="numb">
+    <option disabled>Number Displayed</option>
+   <option>25</option>
+   <option>50</option>
+   <option>75</option>
+   <option>100</option>
+   <option>150</option>
+   <option>200</option>
+   <option>250</option>
+</select>
+
+<button type="button" id="butn">Search</button>
+<br>
+<input type="button" onClick="history.go(0)" value="Refresh"></input>
+
+
+
+    </div>
+    
+<table id='theTable' width='100%'>
+    <tr>
+    <th>Case ID</th>
+    <th>Primary Type</th>
+    
+    <th>Description</th>
+    <th>Location Description</th>
+    <th>Block</th>
+    <th>Date and Time</th>
+    
+    <th>Location</th>
+    </tr>
+</table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        var crime;
+        var baseURL = 'https://data.cityofchicago.org/resource/6zsd-86xi.json';
+        var filters = '?primary_type=';
+        var url = baseURL + filters;
+        console.log(url);
+        $(
+            $("#butn").on("click", function() {
+                $("#results").html("");
+                        var searchTerm = $("#select").val();
+                        
+                        var searchTerm2 = $("#comm").val();
+                        
+                        var searchTerm3 = $("#year").val();
+                        
+                        var urlWithSearch = url + searchTerm + '&community_area=' + searchTerm2 + '&year=' + searchTerm3
+                
+                        console.log(urlWithSearch); 
+                $.getJSON(urlWithSearch)
+                    .done(function(data) {
+                        
+                        data.length = $("#numb").val()
+                        
+                        
+                        
+                        console.log(data);
+                        $.each(data,
+                            function(index, value) {
+                                 
+                              
+                                if (value.longitude === undefined) {}
+                                else{
+                                $("#results").append("Number of records returned: " + data.length + "<br><hr>");
+                                var d = new Date(value.date);
+                        value.date = d.toDateString() + "  " + d.toLocaleTimeString();
+                                
+                            
+                                var html =
+                                
+                                "<tr>"+
+                                    "<td>"+ value.id+ "</td>"+
+                                    "<td>"+ value.primary_type+ "</td>"+
+                                    
+                                    "<td>"+ value.description+"</td>"+
+                                    "<td>"+ value.location_description+ "</td>"+
+                                    "<td>"+ value.block+"</td>"+
+                                    "<td>"+ value.date + "</td>"+
+                                    
+                                    "<td>"+ "<a href='http://google.com/maps?q="+  
+                                    value.latitude+ 
+                                    ","+
+                                    value.longitude+
+                                    "' target='_blank'>"+
+                                    "&#9968"+
+                                    "</a>"+"</td>"+
+                                    "</tr>"
+                                    ;
+                                   
+                                $("#theTable").append(html)
+                                }
+                                                        
+                            })
+                    })
+            })
+        )
+    </script>
+
+</html>
