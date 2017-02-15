@@ -4,6 +4,21 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>repl.it</title>
+        <style>
+          .template {display: none;}
+          
+          .towedVehicle {
+            background-color: silver;
+            border: solid blue 5px;
+            padding: 5px;
+            margin-bottom: 5px;
+          }
+          
+          .towedVehicle span,div {
+            font-family: Helvetica, sans-serif;
+          }
+          
+        </style>
 
     </head>
     <body>
@@ -36,12 +51,17 @@
           var clone;
           
           $.each(data, function (i,v) {
-            clone = $(".towedVehicle").clone();
             
+            clone = $("#towedVehicle").clone();
+
+            
+            clone.removeClass("template");
+
             clone.attr("id", v.plate);
             
             clone.find(".plate").text(v.plate)
             clone.find(".color").text(v.color);
+            
             clone.find(".inventory_number").text(v.inventory_number);
             clone.find(".tow_facility_phone").text(v.tow_facility_phone);
             clone.find(".tow_date").text(v.tow_date);
