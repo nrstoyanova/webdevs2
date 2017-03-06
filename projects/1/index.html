@@ -225,6 +225,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
         var crime;
+<<<<<<< HEAD
         var baseURL = 'https://data.cityofchicago.org/resource/6zsd-86xi.json';
         var filters = '?primary_type=';
         var url = baseURL + filters;
@@ -232,6 +233,25 @@
         $(
             $("#butn").on("click", function() {
                 $("#results").html("");
+=======
+
+        var baseURL = 'https://data.cityofchicago.org/resource/6zsd-86xi.json';
+
+
+        var filters = '?primary_type=';
+
+
+        var url = baseURL + filters;
+
+        console.log(url);
+
+        $(
+
+            $("#butn").on("click", function() {
+
+                $("#results").html("");
+
+>>>>>>> ad3e5e974734cae76292de3d60f6938bf7dc676b
                         var searchTerm = $("#select").val();
                         
                         var searchTerm2 = $("#comm").val();
@@ -241,8 +261,16 @@
                         var urlWithSearch = url + searchTerm + '&community_area=' + searchTerm2 + '&year=' + searchTerm3
                 
                         console.log(urlWithSearch); 
+<<<<<<< HEAD
                 $.getJSON(urlWithSearch)
                     .done(function(data) {
+=======
+
+
+                $.getJSON(urlWithSearch)
+                    .done(function(data) {
+
+>>>>>>> ad3e5e974734cae76292de3d60f6938bf7dc676b
                         
                         data.length = $("#numb").val()
                         
@@ -255,7 +283,15 @@
                               
                                 if (value.longitude === undefined) {}
                                 else{
+<<<<<<< HEAD
                                 $("#results").append("Number of records returned: " + data.length + "<br><hr>");
+=======
+
+
+                                $("#results").append("Number of records returned: " + data.length + "<br><hr>");
+
+
+>>>>>>> ad3e5e974734cae76292de3d60f6938bf7dc676b
                                 var d = new Date(value.date);
                         value.date = d.toDateString() + "  " + d.toLocaleTimeString();
                                 
