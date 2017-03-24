@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<link rel="manifest" href="./manifest.json">
 <head>
 
     <meta charset="utf-8">
@@ -30,7 +30,14 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js" integrity="sha384-0s5Pv64cNZJieYFkXYOTId2HMA2Lfb6q2nAcx2n0RTLUnCAoTTsS0nKEO27XyKcY" crossorigin="anonymous"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
     <![endif]-->
-
+ <link data-cloud9-id='9' rel="manifest" href="./manifest.json">
+    <meta data-cloud9-id='10' name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta data-cloud9-id='11' name="apple-mobile-web-app-capable" content="yes">
+    <meta data-cloud9-id='12' name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta data-cloud9-id='13' name="apple-mobile-web-app-title" content="Nadiaography">
+    <link data-cloud9-id='14' rel="apple-touch-icon" href="https://cdn.iconscout.com/public/images/icon/free/png-192/n-character-alphabet-letter-3f2b847babf013a4-192x192.png">
+    <meta data-cloud9-id='15' name="msapplication-TileImage" content="https://cdn.iconscout.com/public/images/icon/free/png-192/n-character-alphabet-letter-3f2b847babf013a4-192x192.png">
+    <meta data-cloud9-id='16' name="msapplication-TileColor" content="#f6ba4a">
 </head>
 
 <body id="page-top" class="index">
@@ -526,5 +533,15 @@
     <script src="js/agency.min.js"></script>
 
 </body>
-
+<script>
+  if ('serviceWorker' in navigator) {
+    console.log("Will the service worker register?");
+    navigator.serviceWorker.register('service-worker.js')
+      .then(function(reg){
+        console.log("Yes, it did.");
+      }).catch(function(err) {
+        console.log("No it didn't. This happened: ", err)
+      });
+  }
+</script>
 </html>

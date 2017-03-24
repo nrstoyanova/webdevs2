@@ -1,0 +1,16 @@
+{
+  "short_name": "Nadiaography",
+  "name": "Nadia's Photography",
+ "icons": [
+  {
+    "src":"https://cdn.iconscout.com/public/images/icon/free/png-192/n-character-alphabet-letter-3f2b847babf013a4-192x192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }
+],
+  "start_url": "index.html?utm_source=homescreen",
+  "background_color": "#f6ba4a",
+  "Theme_color": "#f6ba4a",
+  "display": "standalone"
+}
+
