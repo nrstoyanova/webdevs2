@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <h1>Lane Tech CTA Bus Routes</h1>
+  <meta charset="utf-8">
+  <title>jQuery.parseXML demo</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <link rel="manifest" href="./manifest.json">
+  <!-- Add to home screen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="CTA">
+  <link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
+   <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
+</head>
+<body>
+  
+  <style>
+    #menu {
+      text-align:center;
+      color:orange;
+      font-size:30px;
+      border: none;
+    }
+    #search{
+    background-color: Salmon; 
+    border: none;
+    color: white;
+    padding: 20px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+h1{ text-align: center;
+background-color: Tomato;
+}
+  
+  div{
+    text-align: center;
+    border-style: solid;
+    
+    
+  }
+  
+  .Ad {
+    background-color: Orange;
+  }
+  
+  .West {
+    background-color: #FFFF99;
+  }
+  
+  body {
+    background-color: seashell;
+  }
+  
+  
+  </style>
+  
+  <!--http://www.transitchicago.com/assets/1/developer_center/cta_Bus_Tracker_API_Developer_Guide_and_Documentation_20160929.pdf-->
+  
+ <div id='menu'>
+       <!-- <label id='select'><input type='checkbox' value='12525'>Addison Eastbound<br>
+        <input type='checkbox' value='152'>Addison Westbound<br>
+        <input type='checkbox' value='49'>Western Southbound<br>
+        <input type='checkbox' value='49'>Western Northbound<br>
+        <input type='checkbox' value='49X'>Western Express Southbound<br>
+      <input type='checkbox' value='49X'>Western Express Northbound<br></label> -->
+        
+       
+ <button id='search'>Search for Arrival Times</button>
+ <br>
+ 
+ </div>
+ <br>
+
+<div id='152' class='Ad'>
+  <h2>Displaying Addison Routes</h2>
+  <br>
+</div>
+<br>
+<div id='49' class='West'>
+  <h2>Displaying Western Routes</h2>
+  <br>
+  
+</div>
+<br>
+
+   
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script>
+   
+          
+          var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+          
+          var apiEndpoint = "http://ctabustracker.com/bustime/api/v2/getpredictions";
+          
+          var filters = "?rt"
+            $("#search").on("click", function() {
+          
+         
+          
+          $.ajax({
+              url: apiPassThruUrl,
+              dataType: "json",
+              method: 'GET',
+              data: {"apiEndpoint": apiEndpoint,
+                      "key" : "a5dkxHtLiq5uJgDTm95zb9QRa",
+                      
+                      "rt" : "152,49",
+                      "stpid": "12527,12569,8147,8195",
+                      "format":"json",
+              }
+            }).done (function (data) {
+              console.log(data);
+              
+  
+        //http://www.ctabustracker.com/bustime/api/v1/getpredictions?key=a5dkxHtLiq5uJgDTm95zb9QRa&rt=152&stpid=12525
+  
+             
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("#"+v.rt).append("Route #" + v.rt + " Direction: " + v.rtdir+ ", " + "Arriving in " + v.prdctdn + " minutes" + "<br>");
+                
+              });
+
+            });
+        });
+            
+  
+</script>
+
+
+
+ 
+</body>
+</html>
