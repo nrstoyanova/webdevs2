@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+     #man{display:none;}
+     #fire{display:none}
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Canvas Game</title>
+    <canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;"></canvas>
+  </head>
+  <body>
+    <img id="nadia" src="http://logos.textgiraffe.com/logos/logo-name/Nadia-designstyle-friday-m.png" alt="player" style="width:75px;height:50px;">
+    
+    <img id="pens" src="http://s7d1.scene7.com/is/image/officedepot/824832_scene7" alt='benefit' style='width:50px;height:50px'>
+    
+    
+    <script>
+     window.onload = function() {
+      var livesRemaining = 3;
+      var score = 0;
+      var level = 1;
+      var paused = false;
+      var player = {x: 0, y: 0, costume: "", speed: 1};
+      var harm = {x: 0, y: 0, costume: "", speed: 1};
+      var benefit = {x: 0, y: 0, costume: ""};
+      /*
+      
+        main animation loop
+      
+      */
+      
+      
+     
+      var c = document.getElementById("myCanvas");
+      var ctx = c.getContext("2d");
+      var img = document.getElementById("nadia");
+      var manX = 0
+      var manY = 100
+      ctx.drawImage(img, manX, manY, 50, 50);
+      
+      
+      var harmer = document.getElementById("pens");
+      harm.x = 250
+      harm.y = Math.floor(Math.random() * 300) 
+      
+      
+      
+      function animate() {
+        
+        ctx.clearRect(0,0,c.width,c.height);
+        // update harm and benefit x coordinates
+        harm.x = harm.x - 1;
+        // draw background
+        
+        //  draw player
+        ctx.drawImage(img, manX, manY, 50, 50);
+        // draw harm 
+        ctx.drawImage(harmer, harm.x , harm.y, 25, 25)
+        // check for and handle edge condition
+        if (harm.x < 0 )
+        {
+          harm.x = c.width;
+        }
+        // check for and handle harm collision
+      
+        // draw benefit
+        
+        // check for and handle edge condition
+        
+        // check for benefit collision
+        
+        // draw text (lives and score)
+        
+        
+        
+        //  if the game has not been paused, 
+        if (!paused) {
+          requestAnimationFrame(animate);
+        }
+        
+      }
+      
+      
+      animate();
+      
+       document.addEventListener("keydown", move )
+        function move (e) {
+          //ctx.clearRect(0,0,c.width,c.height);
+         
+          if (e.keyCode == 40){
+            manY = manY + 3 
+          }
+          if (e.keyCode == 38){
+            manY = manY - 3 
+          }
+           
+        }
+      
+     
+      
+      
+      
+     };
+      
+    </script>
+    
+    
+  </body>
+</html>

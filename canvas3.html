@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+     #basket{display:none}
+     #pineapple{display:none}
+     #coconuts{display:none}
+     #refresh{display:none}
+     #background{display:none}
+     .animate
+{
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
+
+.action-button
+{
+	position: relative;
+	padding: 10px 40px;
+  margin: 0px 10px 10px 0px;
+	border-radius: 10px;
+	font-family: 'Pacifico', cursive;
+	font-size: 25px;
+	color: #FFF;
+	text-decoration: none;	
+}
+
+.blue
+{
+	background-color: #3498DB;
+	border-bottom: 5px solid #2980B9;
+	text-shadow: 0px -2px #2980B9;
+}
+.red
+{
+	background-color: #E74C3C;
+	border-bottom: 5px solid #BD3E31;
+	text-shadow: 0px -2px #BD3E31;
+}
+
+#myCanvas{
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+   }
+   
+   #lives, #score, #level, #start2, #refresh2, #info, #pause2{
+     text-align: center;
+   }
+   
+   #info{
+     color:white;
+   }
+
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Canvas Game</title>
+     <div id='info'>Welcome to Collect the Coconuts!<br>You need to collect more coconuts, to get more points<br>Avoid the pineapples! They make you lose<br>Each coconut gives you ten points, and every 50 points you level up and objects will move faster.<br> Use the left and right arrow keys to move the basket.<br>By: Nadia Stoyanova Period 2</div>
+     <div id='start2'><button type='button' id='start'>Hide This</button></div><br>
+    <canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;"></canvas>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body background='http://img.clipartall.com/beach-background-clipart-beach-background-clipart-2560_1440.jpg'>
+   
+    <!--<div id='lives'>Lives Remaining: 3</div>
+    <div id='score'>Points: 0</div>
+    <div id='level'>Level: 1</div>-->
+    <div id= "pause2"><button type='button' id='pause' class="action-button shadow animate blue">Start Game</button></div>
+    <img id="basket" src="http://images.clipartpanda.com/basket-20clip-20art-easter-basket.png" alt="fireman" style="width:50px;height:50px;">
+    <img id="pineapple" src="http://www.clipartlord.com/wp-content/uploads/2015/02/pineapple8.png" alt='fire' style='width:50px;height:50px'>
+    <img id="coconuts" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Coconut_Clipart_Cartoon.png/923px-Coconut_Clipart_Cartoon.png" alt="water" style="width:50px;height:50px">
+    <img id='background' src='https://s-media-cache-ak0.pinimg.com/736x/43/87/28/4387280bba333bbe1dc2e226e1c7223e.jpg' alt='beach'>
+    <div id='refresh2'><input type="button" onClick="history.go(0)" value="New Game?" id='refresh' class="action-button shadow animate red"></input></div>
+    <script>
+    $("#start").on("click", function() {
+    $('#info').hide()
+    $('#start').hide()
+    })    
+    
+     window.onload = function() {
+      var livesRemaining = 3;
+      var score = 0;
+      var level = 1;
+      var paused = true;
+      var player = {x: 0, y: 0, costume: "", speed: 1};
+      var harm = {x: 0, y: 0, costume: "", speed: 1};
+      var benefit = {x: 0, y: 0, costume: "", speed: 1};
+      /*
+      
+        main animation loop
+      
+      */
+      
+      
+     
+      var c = document.getElementById("myCanvas");
+      var ctx = c.getContext("2d");
+      var img = document.getElementById("basket");
+      player.x = 100 ;
+      player.y = 250;
+      ctx.drawImage(img, player.x, player.y, 50, 50);
+      
+      
+      var harmer = document.getElementById("pineapple");
+      harm.x = Math.floor(Math.random() * 275);
+      harm.y = 50;
+      harm.speed = 1;
+      
+      var helper = document.getElementById("coconuts");
+      benefit.x = Math.floor(Math.random() * 275) ;
+      benefit.y = 50;
+      benefit.speed = 1;
+      
+      
+      var background = document.getElementById("background");
+      
+      function animate() {
+        
+        ctx.clearRect(0,0,c.width,c.height);
+        // update harm and benefit x coordinates
+        harm.y = harm.y + harm.speed;
+        // draw background
+        ctx.drawImage(background, 0, 0, c.width, c.height);
+        //  draw player
+        ctx.drawImage(img, player.x, player.y, 50, 50);
+        // draw harm 
+        ctx.drawImage(harmer, harm.x , harm.y, 25, 25);
+        // check for and handle edge condition
+        ctx.font = '15px Helvetica';
+        ctx.fillStyle = "blue";
+        ctx.textAlign = 'center'
+        ctx.fillText("Score: " + score + ", Level: " + level + ", Lives Remaining: "+ livesRemaining, c.width/2, 15);
+
+        
+        if (harm.y > 300 )
+        {
+          harm.y = 0;
+          harm.x = Math.floor(Math.random() * 275);
+        }
+        // check for and handle harm collision
+        if (Math.abs(harm.x - player.x) < 35 && player.y === harm.y )
+        {
+          livesRemaining = livesRemaining - 1;
+          $('#lives').empty()
+          $('#lives').append('Lives Remaining: ' + livesRemaining)
+        }
+        
+        // draw benefit
+        ctx.drawImage(helper, benefit.x , benefit.y, 25, 25);
+        // check for and handle edge condition
+        benefit.y = benefit.y + benefit.speed;
+        
+        if (benefit.y > 300 )
+        {
+          benefit.y = 0;
+          benefit.x = Math.floor(Math.random() * 275);
+        }
+        // check for benefit collision
+        if (Math.abs(benefit.x - player.x) < 35 && player.y == benefit.y )
+        {
+        score = score + 10;
+        console.log(score);
+        $('#score').empty()
+        $('#score').append('Points: ' + score)
+        }
+        // draw text (lives and score)
+        if (score == 50 * level)
+        {
+        level = level + 1  ;
+        harm.speed = harm.speed + (level / level / 4);
+        $("#level").empty()
+        $('#level').append("Level: " + level)
+        console.log(harm.speed);
+        console.log(level);
+        }
+        //  if the game has not been paused, 
+        if (paused == false && livesRemaining > 0) {
+          requestAnimationFrame(animate);
+        }
+        if (livesRemaining <= 0) {
+          $('#lives').empty()
+          $('#score').empty()
+          $('#level').empty()
+          $('#refresh').show()
+          $('#info').empty()
+          $('#start').hide()
+          $('#pause').hide()
+          ctx.clearRect(0,0,c.width,c.height);
+          ctx.font = '50px Times New Roman';
+          ctx.fillStyle = "white";
+          ctx.textAlign = "center";
+          ctx.fillText("You Lose", c.width/2, 50);
+          ctx.fillText("Score: "+ score, c.width/2, 150);
+          ctx.fillText("Level: " + level, c.width/2, 250); 
+          }
+       
+      }
+      
+      
+      animate();
+      
+       document.getElementById("pause").onclick = function (){
+          paused = !paused;
+          $('#pause').empty()
+          $('#pause').append('Resume Game')
+          console.log(paused);
+          if (paused == false){
+            requestAnimationFrame(animate);
+            $('#pause').empty()
+            $('#pause').append('Pause Game')
+          }
+        };
+      
+      
+       document.addEventListener("keydown", move );
+        function move (e) {
+          
+         
+          if (e.keyCode == 39 && player.x < 250){
+            player.x = player.x + 3 ;
+          }
+          if (e.keyCode == 37 && player.x > 0){
+            player.x = player.x - 3 ;
+          }
+          
+          
+          
+        }
+      
+     
+      
+      
+      
+     };
+      
+    </script>
+    
+    
+  </body>
+</html>
